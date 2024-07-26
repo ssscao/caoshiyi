@@ -20,6 +20,7 @@ import {
 // 导入 Next.js 的路由 hook
 import { usePathname } from 'next/navigation';
 import React from 'react';
+
 // 导入自定义组件
 import { NavigationBar } from '~/app/(main)/NavigationBar';
 import { NetEaseMusic } from '~/app/(main)/NetEaseMusic';
@@ -35,43 +36,54 @@ import { Container } from '~/components/ui/Container';
 import { Tooltip } from '~/components/ui/Tooltip';
 import { url } from '~/lib';
 import { clamp } from '~/lib/math';
+
 // Header 组件定义
 export function Header() {
   const isHomePage = usePathname() === '/';
+
   // useRef 用于创建保存可变值的引用
   const headerRef = React.useRef<HTMLDivElement>(null);
   const avatarRef = React.useRef<HTMLDivElement>(null);
   const isInitial = React.useRef(true);
+
   // useMotionValue 用于创建动画驱动的可变值
   const avatarX = useMotionValue(0);
   const avatarScale = useMotionValue(1);
   const avatarBorderX = useMotionValue(0);
   const avatarBorderScale = useMotionValue(1);
+
   // useEffect 用于处理副作用，比如 DOM 操作或数据订阅
   React.useEffect(() => {
     // 下拉延迟和上拉延迟的值
     const downDelay = avatarRef.current?.offsetTop ?? 0;
     const upDelay = 64;
+
     function setProperty(property: string, value: string | null) {
       document.documentElement.style.setProperty(property, value)
     }
+
     function removeProperty(property: string) {
       document.documentElement.style.removeProperty(property)
     }
+
     function updateHeaderStyles() {
       if (!headerRef.current) {
         return
       }
+
       const { top, height } = headerRef.current.getBoundingClientRect()
       const scrollY = clamp(
         window.scrollY,
         0,
         document.body.scrollHeight - window.innerHeight
       )
+
       if (isInitial.current) {
         setProperty('--header-position', 'sticky')
       }
+
       setProperty('--content-offset', `${downDelay}px`)
+
       if (isInitial.current || scrollY < downDelay) {
         setProperty('--header-height', `${downDelay + height}px`)
         setProperty('--header-mb', `${-downDelay}px`)
@@ -83,6 +95,7 @@ export function Header() {
         setProperty('--header-height', `${scrollY + height}px`)
         setProperty('--header-mb', `${-scrollY}px`)
       }
+
       if (top === 0 && scrollY > 0 && scrollY >= downDelay) {
         setProperty('--header-inner-position', 'fixed')
         removeProperty('--header-top')
@@ -93,42 +106,56 @@ export function Header() {
         setProperty('--avatar-top', '0px')
       }
     }
+
     function updateAvatarStyles() {
       if (!isHomePage) {
         return
       }
+
       const fromScale = 1
       const toScale = 36 / 64
       const fromX = 0
       const toX = 2 / 16
+
       const scrollY = downDelay - window.scrollY
+
       let scale = (scrollY * (fromScale - toScale)) / downDelay + toScale
       scale = clamp(scale, fromScale, toScale)
+
       let x = (scrollY * (fromX - toX)) / downDelay + toX
       x = clamp(x, fromX, toX)
+
       avatarX.set(x)
       avatarScale.set(scale)
+
       const borderScale = 1 / (toScale / scale)
+
       avatarBorderX.set((-toX + x) * borderScale)
       avatarBorderScale.set(borderScale)
+
       setProperty('--avatar-border-opacity', scale === toScale ? '1' : '0')
     }
+
     function updateStyles() {
       updateHeaderStyles()
       updateAvatarStyles()
       isInitial.current = false
     }
+
     updateStyles()
     window.addEventListener('scroll', updateStyles, { passive: true })
     window.addEventListener('resize', updateStyles)
+
     return () => {
       window.removeEventListener('scroll', updateStyles)
       window.removeEventListener('resize', updateStyles)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHomePage])
+
   const avatarTransform = useMotionTemplate`translate3d(${avatarX}rem, 0, 0) scale(${avatarScale})`
   const avatarBorderTransform = useMotionTemplate`translate3d(${avatarBorderX}rem, 0, 0) scale(${avatarBorderScale})`
+
   const [isShowingAltAvatar, setIsShowingAltAvatar] = React.useState(false)
   const onAvatarContextMenu = React.useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
@@ -137,6 +164,7 @@ export function Header() {
     },
     []
   )
+
   return (
     <>
       
@@ -159,6 +187,9 @@ export function Header() {
                 ref={avatarRef}
                 className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
               />
+
+
+
               <Container
                 className="top-0 order-last -mb-3 pt-3"
                 style={{
@@ -196,6 +227,7 @@ export function Header() {
                     >
                       <Avatar />
                     </motion.div>
+
                     <motion.div
                       className="block h-16 w-16 origin-left"
                       style={{
@@ -259,6 +291,8 @@ export function Header() {
                 <NavigationBar.Mobile className="pointer-events-auto relative z-50 md:hidden" />
                 <NavigationBar.Desktop className="pointer-events-auto relative z-50 hidden md:block" />
               </div>
+
+
               
               <motion.div
                 className="flex justify-end gap-3 md:flex-1"
@@ -270,6 +304,9 @@ export function Header() {
                   <ThemeSwitcher />
                 </div>
               </motion.div>
+
+
+
               
               {/* 
               <AnimatePresence>
@@ -291,6 +328,7 @@ export function Header() {
           </Container>
         </div>
       </motion.header>
+
 <Container
 //  className="top-[var(--header-top,theme(spacing.6))] w-full"
  // style={{
@@ -308,16 +346,6 @@ export function Header() {
 <NetEaseMusic />  {/* 添加 NetEaseMusic 组件 */}
 
 
-    
-          
-            
-    
-
-          
-          向下展开
-    
-    
-  
       
       
 {isHomePage && <div className="h-[--content-offset]" />}
@@ -326,6 +354,7 @@ export function Header() {
     </>
   )
 }
+
 function UserInfo() {
   const [tooltipOpen, setTooltipOpen] = React.useState(false)
   const pathname = usePathname()
@@ -335,6 +364,7 @@ function UserInfo() {
     if (!strategy) {
       return null
     }
+
     switch (strategy) {
       case 'from_oauth_github':
         return GitHubBrandIcon as (
@@ -346,6 +376,7 @@ function UserInfo() {
         return MailIcon
     }
   }, [user?.primaryEmailAddress?.verification.strategy])
+
   return (
     <AnimatePresence>
       <SignedIn key="user-info">
@@ -389,6 +420,7 @@ function UserInfo() {
                   </button>
                 </Tooltip.Trigger>
               </SignInButton>
+
               <AnimatePresence>
                 {tooltipOpen && (
                   <Tooltip.Portal forceMount>
