@@ -1,22 +1,18 @@
 'use client'
-
 import { motion } from 'framer-motion'
 import Balancer from 'react-wrap-balancer'
-
 import { SparkleIcon, UserSecurityIcon } from '~/assets'
 import { PeekabooLink } from '~/components/links/PeekabooLink'
 import { SocialLink } from '~/components/links/SocialLink'
-
 function Developer() {
   return (
     <span className="group">
-      <span className="font-mono">&lt;</span>开发者
+      <span className="font-mono">&lt;</span>灵界和源堡的眷者
       <span className="font-mono">/&gt;</span>
       <span className="invisible inline-flex text-zinc-300 before:content-['|'] group-hover:visible group-hover:animate-typing dark:text-zinc-500" />
     </span>
   )
 }
-
 function Designer() {
   return (
     <span className="group relative bg-black/5 p-1 dark:bg-white/5">
@@ -26,29 +22,26 @@ function Designer() {
         <span className="absolute -bottom-[3.5px] -left-[3.5px] size-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
         <span className="absolute -right-[3.5px] -top-[3.5px] size-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
       </span>
-      设计师
+      源自古代的诡秘
     </span>
   )
 }
-
 function OCD() {
   return (
     <span className="group inline-flex items-center">
       <SparkleIcon className="mr-1 inline-flex transform-gpu transition-transform duration-500 group-hover:rotate-180" />
-      <span>细节控</span>
+      <span>贝克兰德所有贫困孩子的保护者</span>
     </span>
   )
 }
-
 function Founder() {
   return (
     <span className="group inline-flex items-center">
       <UserSecurityIcon className="mr-1 inline-flex group-hover:fill-zinc-600/20 dark:group-hover:fill-zinc-200/20" />
-      <span>创始人</span>
+      <span>漫长历史的见证</span>
     </span>
   )
 }
-
 export function Headline() {
   return (
     <div className="max-w-2xl">
@@ -63,12 +56,27 @@ export function Headline() {
           duration: 0.3,
         }}
       >
-        <Developer />，<Designer />，
+        <Developer />
         <span className="block h-2" />
-        <OCD />，<Founder />
+        <Designer />
+        <span className="block h-2" />
+        <OCD />
+        <span className="block h-2" />
+        <Founder />
       </motion.h1>
       <motion.p
         className="mt-6 text-base text-zinc-600 dark:text-zinc-400"
+
+    
+          
+            
+    
+
+          
+          向下展开
+    
+    
+  
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
