@@ -11,8 +11,7 @@
     "dev:email": "email dev -p 3333",
     "dev:turbo": "next dev --turbo",
     "lint": "next lint",
-    "start": "next start",
-    "postinstall": "npx magicui-cli add border-beam"
+    "start": "next start"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.9",
