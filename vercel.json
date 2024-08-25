@@ -2,5 +2,8 @@
   "buildCommand": "pnpm turbo build",
   "github": {
     "silent": true
+  },
+  "scripts": {
+    "postinstall": "npx magicui-cli add border-beam"
   }
 }
