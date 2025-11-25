@@ -391,7 +391,7 @@ function UserInfo() {
             appearance={{
               elements: {
                 avatarBox: 'w-9 h-9 ring-2 ring-white/20',
-              }，
+              },
             }}
           />
           {StrategyIcon && (
@@ -404,13 +404,13 @@ function UserInfo() {
       <SignedOut key="sign-in">
         <motion.div
           className="pointer-events-auto"
-          initial={{ opacity: 0, x: 25 }}
+          initial={{ opacity: 0， x: 25 }}
           animate={{ opacity: 1， x: 0 }}
           exit={{ opacity: 0， x: 25 }}
         >
           <Tooltip.Provider disableHoverableContent>
             <Tooltip.Root open={tooltipOpen} onOpenChange={setTooltipOpen}>
-              <SignInButton mode="modal" redirectUrl={url(pathname)。href}>
+              <SignInButton mode="modal" redirectUrl={url(pathname).href}>
                 <Tooltip.Trigger asChild>
                   <button
                     输入="button"
@@ -426,9 +426,9 @@ function UserInfo() {
                   <Tooltip.Portal forceMount>
                     <Tooltip.Content asChild>
                       <motion.div
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
+                        initial={{ opacity: 0， scale: 0.96 }}
+                        animate={{ opacity: 1， scale: 1 }}
+                        exit={{ opacity: 0， scale: 0.95 }}
                       >
                         登录
                       </motion.div>
