@@ -1,4 +1,6 @@
 'use client'
+// 导入 React 相关的模块
+// 导入 Clerk 的相关组件和 hook
 import {
   SignedIn,
   SignedOut,
@@ -6,16 +8,20 @@ import {
   UserButton,
   useUser,
 } from '@clerk/nextjs';
+// 导入自定义工具函数和组件
 import { clsxm } from '@zolplay/utils';
+// 导入 framer-motion 的动画相关组件和 hook
 import {
   AnimatePresence,
   motion,
   useMotionTemplate,
   useMotionValue,
 } from 'framer-motion';
+// 导入 Next.js 的路由 hook
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
+// 导入自定义组件
 import { NavigationBar } from '~/app/(main)/NavigationBar';
 import { NetEaseMusic } from '~/app/(main)/NetEaseMusic';
 import { ThemeSwitcher } from '~/app/(main)/ThemeSwitcher';
@@ -31,18 +37,24 @@ import { Tooltip } from '~/components/ui/Tooltip';
 import { url } from '~/lib';
 import { clamp } from '~/lib/math';
 
+// Header 组件定义
 export function Header() {
   const isHomePage = usePathname() === '/';
+
+  // useRef 用于创建保存可变值的引用
   const headerRef = React.useRef<HTMLDivElement>(null);
   const avatarRef = React.useRef<HTMLDivElement>(null);
   const isInitial = React.useRef(true);
 
+  // useMotionValue 用于创建动画驱动的可变值
   const avatarX = useMotionValue(0);
   const avatarScale = useMotionValue(1);
   const avatarBorderX = useMotionValue(0);
   const avatarBorderScale = useMotionValue(1);
 
+  // useEffect 用于处理副作用，比如 DOM 操作或数据订阅
   React.useEffect(() => {
+    // 下拉延迟和上拉延迟的值
     const downDelay = avatarRef.current?.offsetTop ?? 0;
     const upDelay = 64;
 
@@ -55,7 +67,9 @@ export function Header() {
     }
 
     function updateHeaderStyles() {
-      if (!headerRef.current) return
+      if (!headerRef.current) {
+        return
+      }
 
       const { top, height } = headerRef.current.getBoundingClientRect()
       const scrollY = clamp(
@@ -64,7 +78,9 @@ export function Header() {
         document.body.scrollHeight - window.innerHeight
       )
 
-      if (isInitial.current) setProperty('--header-position', 'sticky')
+      if (isInitial.current) {
+        setProperty('--header-position', 'sticky')
+      }
 
       setProperty('--content-offset', `${downDelay}px`)
 
@@ -92,7 +108,9 @@ export function Header() {
     }
 
     function updateAvatarStyles() {
-      if (!isHomePage) return
+      if (!isHomePage) {
+        return
+      }
 
       const fromScale = 1
       const toScale = 36 / 64
@@ -132,6 +150,7 @@ export function Header() {
       window.removeEventListener('scroll', updateStyles)
       window.removeEventListener('resize', updateStyles)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHomePage])
 
   const avatarTransform = useMotionTemplate`translate3d(${avatarX}rem, 0, 0) scale(${avatarScale})`
@@ -148,7 +167,9 @@ export function Header() {
 
   return (
     <>
+      
       <motion.header
+        
         className={clsxm(
           'pointer-events-none relative z-50 mb-[var(--header-mb,0px)] flex flex-col',
           isHomePage
@@ -158,77 +179,77 @@ export function Header() {
         layout
         layoutRoot
       >
+        
+          {isHomePage && (
+            <>
+             
+              <div
+                ref={avatarRef}
+                className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
+              />
 
-        {isHomePage && (
-          <>
-            <div
-              ref={avatarRef}
-              className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
-            />
 
-            <Container
-              className="top-0 order-last -mb-3 pt-3"
-              style={{
-                position:
-                  'var(--header-position)' as React.CSSProperties['position'],
-              }}
-            >
-              <motion.div
-                className="top-[var(--avatar-top,theme(spacing.3))] w-full select-none"
+
+              <Container
+                className="top-0 order-last -mb-3 pt-3"
                 style={{
                   position:
-                    'var(--header-inner-position)' as React.CSSProperties['position'],
-                }}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  type: 'spring',
-                  damping: 30,
-                  stiffness: 200,
+                    'var(--header-position)' as React.CSSProperties['position'],
                 }}
               >
+            
+            
                 <motion.div
-                  className="relative inline-flex"
-                  layoutId="avatar"
-                  layout
-                  onContextMenu={onAvatarContextMenu}
+                  className="top-[var(--avatar-top,theme(spacing.3))] w-full select-none"
+                  style={{
+                    position:
+                      'var(--header-inner-position)' as React.CSSProperties['position'],
+                  }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: 'spring',
+                    damping: 30,
+                    stiffness: 200,
+                  }}
                 >
                   <motion.div
-                    className="absolute left-0 top-3 origin-left opacity-[var(--avatar-border-opacity,0)] transition-opacity"
-                    style={{
-                      transform: avatarBorderTransform,
-                    }}
+                    className="relative inline-flex"
+                    layoutId="avatar"
+                    layout
+                    onContextMenu={onAvatarContextMenu}
                   >
-                    <Avatar />
-                  </motion.div>
+                    <motion.div
+                      className="absolute left-0 top-3 origin-left opacity-[var(--avatar-border-opacity,0)] transition-opacity"
+                      style={{
+                        transform: avatarBorderTransform,
+                      }}
+                    >
+                      <Avatar />
+                    </motion.div>
 
-                  <motion.div
-                    className="block h-16 w-16 origin-left"
-                    style={{
-                      transform: avatarTransform,
-                    }}
-                  >
-                    <Avatar.Image
-                      large
-                      alt={isShowingAltAvatar}
-                      className="block h-full w-full"
-                    />
+                    <motion.div
+                      className="block h-16 w-16 origin-left"
+                      style={{
+                        transform: avatarTransform,
+                      }}
+                    >
+                      <Avatar.Image
+                        large
+                        alt={isShowingAltAvatar}
+                        className="block h-full w-full"
+                      />
+                    </motion.div>
                   </motion.div>
                 </motion.div>
-              </motion.div>
-            </Container>
-          </>
-        )}
-
+                
+              </Container>
+            </>
+          )}
+       
         <div
           ref={headerRef}
-          className="
-            top-0 z-10 h-16 pt-6
-            backdrop-blur-xl 
-            bg-white/30 dark:bg-zinc-900/30
-            border-b border-white/20 dark:border-white/10
-            rounded-b-2xl
-          "
+          className="top-0 z-10 h-16 pt-6"
           style={{
             position:
               'var(--header-position)' as React.CSSProperties['position'],
@@ -266,12 +287,13 @@ export function Header() {
                   )}
                 </AnimatePresence>
               </motion.div>
-
               <div className="flex flex-1 justify-end md:justify-center">
                 <NavigationBar.Mobile className="pointer-events-auto relative z-50 md:hidden" />
                 <NavigationBar.Desktop className="pointer-events-auto relative z-50 hidden md:block" />
               </div>
 
+
+              
               <motion.div
                 className="flex justify-end gap-3 md:flex-1"
                 initial={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -282,14 +304,53 @@ export function Header() {
                   <ThemeSwitcher />
                 </div>
               </motion.div>
+
+
+
+              
+              {/* 
+              <AnimatePresence>
+                {!isHomePage && (
+                  <motion.div
+                    className="absolute left-14 top-1 flex h-8 items-center"
+                    initial={{ opacity: 0, scale: 0.3 }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      transition: { delay: 1 },
+                    }}
+                  >
+                    <Activity />
+                  </motion.div>
+                )}
+              </AnimatePresence> */}
             </div>
           </Container>
         </div>
       </motion.header>
 
-      <Container></Container>
-      <NetEaseMusic />
-      {isHomePage && <div className="h-[--content-offset]" />}
+<Container
+//  className="top-[var(--header-top,theme(spacing.6))] w-full"
+ // style={{
+  //  position: 'var(--header-inner-position)' as React.CSSProperties['position'],
+ // }}
+>
+  {/* 其他代码 
+  <div className="flex justify-end gap-3 md:flex-1">
+    <UserInfo />
+    <div className="pointer-events-auto">
+      <ThemeSwitcher />
+    </div>
+  </div>*/}
+</Container>
+<NetEaseMusic />  {/* 添加 NetEaseMusic 组件 */}
+
+
+      
+      
+{isHomePage && <div className="h-[--content-offset]" />}
+{/* 在这里添加 NetEaseMusic 组件 */}
+{/* <NetEaseMusic /> */}
     </>
   )
 }
@@ -300,7 +361,9 @@ function UserInfo() {
   const { user } = useUser()
   const StrategyIcon = React.useMemo(() => {
     const strategy = user?.primaryEmailAddress?.verification.strategy
-    if (!strategy) return null
+    if (!strategy) {
+      return null
+    }
 
     switch (strategy) {
       case 'from_oauth_github':
@@ -328,10 +391,9 @@ function UserInfo() {
             appearance={{
               elements: {
                 avatarBox: 'w-9 h-9 ring-2 ring-white/20',
-              },
+              }，
             }}
           />
-
           {StrategyIcon && (
             <span className="pointer-events-none absolute -bottom-1 -right-1 flex h-4 w-4 select-none items-center justify-center rounded-full bg-white dark:bg-zinc-900">
               <StrategyIcon className="h-3 w-3" />
@@ -339,20 +401,19 @@ function UserInfo() {
           )}
         </motion.div>
       </SignedIn>
-
       <SignedOut key="sign-in">
         <motion.div
           className="pointer-events-auto"
           initial={{ opacity: 0, x: 25 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 25 }}
+          animate={{ opacity: 1， x: 0 }}
+          exit={{ opacity: 0， x: 25 }}
         >
           <Tooltip.Provider disableHoverableContent>
             <Tooltip.Root open={tooltipOpen} onOpenChange={setTooltipOpen}>
-              <SignInButton mode="modal" redirectUrl={url(pathname).href}>
+              <SignInButton mode="modal" redirectUrl={url(pathname)。href}>
                 <Tooltip.Trigger asChild>
                   <button
-                    type="button"
+                    输入="button"
                     className="group h-10 rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 text-sm shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
                   >
                     <UserArrowLeftIcon className="h-5 w-5" />
@@ -381,4 +442,4 @@ function UserInfo() {
       </SignedOut>
     </AnimatePresence>
   )
-}
+      }
