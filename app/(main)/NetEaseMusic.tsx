@@ -9,14 +9,7 @@ export function NetEaseMusic() {
         alignItems: 'center',
       }}
     >
-      <iframe
-        frameBorder="no"
-        width="330"
-        height="120"
-        src="https://music.163.com/outchain/player?type=0&id=13056897678&auto=1&height=90"
-        className="rounded shadow-lg"
-        style={{ verticalAlign: 'middle' }}
-      ></iframe>
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=6673286917&auto=1&height=90"></iframe>
     </div>
   );
 }
