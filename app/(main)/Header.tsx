@@ -1,4 +1,4 @@
-```tsx
+
 'use client'
 import {
   SignedIn,
@@ -133,12 +133,12 @@ export function Header() {
       window.removeEventListener('scroll', updateStyles)
       window.removeEventListener('resize', updateStyles)
     }
-  }, [isHomePage])
+  }， [isHomePage])
 
   const avatarTransform = useMotionTemplate`translate3d(${avatarX}rem, 0, 0) scale(${avatarScale})`
   const avatarBorderTransform = useMotionTemplate`translate3d(${avatarBorderX}rem, 0, 0) scale(${avatarBorderScale})`
 
-  const [isShowingAltAvatar, setIsShowingAltAvatar] = React.useState(false)
+  const [isShowingAltAvatar， setIsShowingAltAvatar] = React.useState(false)
   const onAvatarContextMenu = React.useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       event.preventDefault()
@@ -151,7 +151,7 @@ export function Header() {
     <>
       <motion.header
         className={clsxm(
-          'pointer-events-none relative z-50 mb-[var(--header-mb,0px)] flex flex-col',
+          'pointer-events-none relative z-50 mb-[var(--header-mb,0px)] flex flex-col'，
           isHomePage
             ? 'h-[var(--header-height,180px)]'
             : 'h-[var(--header-height,64px)]'
@@ -248,7 +248,7 @@ export function Header() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  type: 'spring',
+                  输入: 'spring',
                   damping: 30,
                   stiffness: 200,
                 }}
@@ -310,7 +310,7 @@ function UserInfo() {
         ) => JSX.Element
       case 'from_oauth_google':
         return GoogleBrandIcon
-      default:
+      默认:
         return MailIcon
     }
   }, [user?.primaryEmailAddress?.verification.strategy])
@@ -325,11 +325,11 @@ function UserInfo() {
           exit={{ opacity: 0, x: 25 }}
         >
           <UserButton
-            afterSignOutUrl={url(pathname).href}
+            afterSignOutUrl={url(pathname)。href}
             appearance={{
               elements: {
                 avatarBox: 'w-9 h-9 ring-2 ring-white/20',
-              },
+              }，
             }}
           />
 
@@ -353,7 +353,7 @@ function UserInfo() {
               <SignInButton mode="modal" redirectUrl={url(pathname).href}>
                 <Tooltip.Trigger asChild>
                   <button
-                    type="button"
+                    输入="button"
                     className="group h-10 rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 text-sm shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
                   >
                     <UserArrowLeftIcon className="h-5 w-5" />
@@ -383,4 +383,4 @@ function UserInfo() {
     </AnimatePresence>
   )
 }
-```
+
