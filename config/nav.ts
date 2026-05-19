@@ -4,5 +4,5 @@ export const navigationItems = [
   { href: '/projects', text: '项目' },
   { href: '/guestbook', text: '留言墙' },
   { href: '/ama', text: '杂谈' },
-  { href: '/about'， text: '关于' },
+  //{ href: '/about'， text: '关于' },
 ]
