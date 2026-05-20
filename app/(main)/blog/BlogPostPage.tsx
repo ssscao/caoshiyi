@@ -1,5 +1,9 @@
 'use client'
 
+// 加上这一行，把这个数字美化工具函数拉进来
+import { prettifyNumber } from '~/lib/math'
+
+
 // 引入第三方日期解析工具，用来将各种奇怪的后台时间格式规范化
 import { parseDateTime } from '@zolplay/utils'
 // 引入强大的动画库，专门负责给页面上的封面图、标题制作丝滑的入场动画效果
