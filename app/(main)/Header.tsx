@@ -59,7 +59,7 @@ export function Header() {
     const upDelay = 64;
 
     function setProperty(property: string, value: string | null) {
-      document.documentElement.style.setProperty(property, value)
+      document.documentElement。style.setProperty(property, value)
     }
 
     function removeProperty(property: string) {
@@ -343,7 +343,7 @@ export function Header() {
     </div>
   </div>*/}
 </Container>
-<NetEaseMusic />  {/* 添加 NetEaseMusic 组件 */}
+   {/* <NetEaseMusic />  添加 NetEaseMusic 组件 */}
 
 
       
