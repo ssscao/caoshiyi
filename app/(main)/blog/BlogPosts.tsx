@@ -35,9 +35,9 @@ export async function BlogPosts({ limit = 5 }) {
   return (
     // React 的空标签，用来包裹循环出来的多篇文章卡片
     <>
-      {/* 循环遍历文章数组。post 代表当前这篇文章的数据，idx 代表它是第几篇（0, 1, 2...） */}
+      {/* 循环遍历文章数组。post 代表当前文章，idx 代表它是第几篇。
+          调用单篇文章卡片组件，views={views[idx] ?? 0} 的意思是：把上面从 Redis 查到的对应位置的浏览量传过去，如果没查到就显示 0 */}
       {posts.map((post, idx) => (
-        {/* 调用单篇文章卡片组件。views={views[idx] ?? 0} 的意思是：把上面查到的对应位置的浏览量传过去，如果没查到就显示 0 */}
         <BlogPostCard post={post} views={views[idx] ?? 0} key={post._id} />
       ))}
     </>
