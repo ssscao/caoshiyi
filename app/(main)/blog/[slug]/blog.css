@@ -1,70 +1,138 @@
+/**
+ * 【文件大致作用】：
+ *   本文件是博客文章详情页中“评论内容专用样式表（CSS）”。
+ *   因为读者的评论通常支持富文本、Markdown 或 HTML 标签输入（例如带有加粗、标题、代码块、引用等），
+ *   这些原生的标签在全局 Tailwind 的样式重置下会失去默认外观（变得像普通文本一样平淡无奇）。
+ *   这个文件的唯一目的，就是针对类名为 `.comment__message` 的评论区域，强行定制一套精致、美观、高可读性的“排版印刷规范”，
+ *   并且全面适配了白天和暗黑（.dark）两种主题模式。
+ * 
+ * 【哪些文件可能会用到当前文件】：
+ *   - `app/(main)/blog/[slug]/page.tsx`（文章详情页主入口）
+ *   - 该目录下可能会拆分出的评论列表组件（例如 `CommentsList.tsx` 或 `CommentItem.tsx`）
+ *   通过在页面组件顶部 `import './blog.css'`，即可让这些精美的排版样式在全球生效。
+ * 
+ * 【当前文件使用了哪些文件】：
+ *   - 本文件是一套纯样式控制表，不直接引用其他前端代码文件，但它深度依赖了网页构建中必不可少的 Tailwind CSS 框架工具。
+ */
+
+/* ==========================================================================
+   【白天模式（默认）下的评论文本排版规范】
+   ========================================================================== */
 .comment__message {
+  
+  /* 针对评论区里【所有子标签（*）】的通用基本设置 */
   * {
+    /* @apply 是 Tailwind 的魔法指令，代表直接把 Tailwind 预设的底层 CSS 类名拿过来用。
+       leading-6：统一规定每一行字之间的行高为 1.5rem（24像素），让密集的文字呼吸感更好，不压抑。 */
     @apply leading-6;
   }
 
+  /* 针对 1 到 6 级所有标题标签的通用样式 */
   h1, h2, h3, h4, h5, h6 {
+    /* tracking-tight：让标题的字间距稍微收紧一点（更具高档报刊的印刷感）
+       font-semibold：字形加粗到 600（半粗体） */
     @apply tracking-tight font-semibold;
   }
 
+  /* 针对一级大标题 */
   h1 {
+    /* text-lg：字号放大至 1.125rem（18像素）
+       font-bold：彻底加粗（700粗体） */
     @apply text-lg font-bold;
   }
 
+  /* 针对二级标题（作者使用了原生 CSS 与 Tailwind 混写，非常自由） */
   h2 {
-    font-size: 1.065rem;
-    line-height: 1.75rem;
-    @apply font-bold;
+    font-size: 1.065rem;    /* 精密调节二级标题字号 */
+    line-height: 1.75rem;   /* 精密调节二级标题行高 */
+    @apply font-bold;       /* 加粗 */
   }
 
+  /* 针对评论里划过的水平分割线（<hr />） */
   hr {
+    /* my-1.5：垂直外边距上下各空出 6 像素
+       border-zinc-400：线条使用中灰色的锌色调
+       opacity-20：将线条半透明化至 20%，若隐若现，低调不抢眼 */
     @apply my-1.5 border-zinc-400 opacity-20;
   }
 
+  /* 针对无序列表（<ul>），即带小圆点的条目清单 */
   ul {
+    /* list-disc：强制小圆点露出来
+       pl-4：左侧缩进 16 像素，给圆点腾出优雅的摆放空间 */
     @apply list-disc pl-4;
   }
 
+  /* 针对有序列表（<ol>），即带 1. 2. 3. 数字的清单 */
   ol {
+    /* list-decimal：强制数字编号显示
+       pl-4：左侧缩进 16 像素 */
     @apply list-decimal pl-4;
   }
 
+  /* 针对引用块（<blockquote>），通常用于读者引用其他人的原话 */
   blockquote {
+    /* my-1：上下外边距留空 4 像素
+       pl-2：左侧内边距留空 8 像素
+       border-l-4：左边框加粗至 4 像素
+       border-zinc-400：左侧这根“引用线”涂上深灰色，形成视觉阻隔区 */
     @apply my-1 pl-2 border-l-4 border-zinc-400;
   }
 
+  /* 针对评论里读者上传的图片和发布的视频 */
   img, video {
-    @apply rounded-md;
-    max-height: 350px;
+    @apply rounded-md;   /* 四周切出好看的中等圆角 */
+    max-height: 350px;   /* 极度克制：限制媒体文件最大高度为 350 像素，防止有人发巨图恶意刷屏 */
   }
 
+  /* 针对大段的长代码块外层容器（<pre>） */
   pre {
+    /* my-1.5：上下外边距空出 6 像素
+       whitespace-break-spaces：【高级抗防爆】：如果代码太长超出屏幕，自动强制换行，绝不允许代码撑破卡片边框 */
     @apply my-1.5 whitespace-break-spaces;
   }
 
+  /* 针对大段代码块（pre），以及没有被代码高亮插件接管的普通行内零碎小代码（code） */
   pre, code:not([class^="language-"]) {
+    /* px-1 py-0.5：四周包裹一圈贴身小边框
+       rounded：给小代码切个圆角微型盒子
+       bg-zinc-700/10：背景垫上一层极其温和的 10% 透明度深灰阴影底色
+       text-zinc-900：代码文字涂上墨黑色，保证高对比度 */
     @apply px-1 py-0.5 rounded bg-zinc-700/10 text-zinc-900;
   }
 
+  /* 权重校准：如果 code 标签是躺在 pre（大代码块）肚子里面的子元素 */
   pre > code {
+    /* 那么它就不需要继承上面的小底色了，背景必须回归全透明（bg-transparent）
+       !important 是 CSS 里的尚方宝剑，拥有绝对最高解释权，确保底色一定会被清空 */
     @apply px-0 py-0 bg-transparent !important;
   }
 }
 
+
+/* ==========================================================================
+   【暗黑模式（.dark）下的特殊样式救赎】
+   当网站宿主被切换到夜间模式（外层标签被挂上 .dark 类名）时，自动触发以下覆写，防止读者被亮瞎
+   ========================================================================== */
 .dark .comment__message {
+  
+  /* 暗黑下的水平分割线 */
   hr {
-    @apply border-zinc-100 opacity-20;
+    @apply border-zinc-100 opacity-20; /* 悄悄把分割线替换为银白色的亮色线，再半透明化 */
   }
 
+  /* 暗黑下的引用区 */
   blockquote {
-    @apply border-zinc-50/50;
+    @apply border-zinc-50/50; /* 引用框左侧线变成 50% 半透明的雪白色 */
   }
 
+  /* 暗黑下的代码块与小代码屑 */
   pre, code:not([class^="language-"]) {
-    @apply bg-zinc-200/20 text-zinc-50;
+    @apply bg-zinc-200/20 text-zinc-50; /* 背景换成淡淡的白霜阴影（20%），代码文字彻底变白（zinc-50），深夜阅读也极度舒适 */
   }
 
+  /* 暗黑下嵌套大代码块的内部校准 */
   pre > code {
-    @apply bg-transparent !important;
+    @apply bg-transparent !important; /* 同样雷打不动地保持大代码块内部的纯净全透 */
   }
 }
