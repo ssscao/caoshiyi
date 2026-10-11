@@ -67,8 +67,17 @@ export const getBlogPostQuery = groq`
         "lqip": asset->metadata.lqip,
         "dimensions": asset->metadata.dimensions,
         ...
+      },
+      _type == "video" => {
+        ...,
+        "url": asset->url,
+        "mimeType": asset->mimeType,
+        "originalFilename": asset->originalFilename
       }
     },
+
+
+    
     "headings": body[length(style) == 2 && string::startsWith(style, "h")],
     mainImage {
       _ref,
