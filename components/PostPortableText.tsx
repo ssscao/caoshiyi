@@ -30,6 +30,7 @@ const components: PortableTextComponents = {
   listItem: PortableTextBlocksListItem,
   types: {
     image: PortableTextImage,
+    video: PortableTextVideo,
     tweet: PortableTextTweet,
     codeBlock: PortableTextCodeBlock,
   },
