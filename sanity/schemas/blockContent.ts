@@ -112,6 +112,24 @@ export default defineType({
         },
       },
     }),
+
+    
+    defineArrayMember({
+      name: 'video',
+      title: '视频',
+      type: 'file',
+      options: {
+        accept: 'video/*',
+      },
+      fields: [
+        {
+          name: 'caption',
+          title: '视频说明',
+          type: 'string',
+        },
+      ],
+    }),
+
     defineArrayMember({
       type: 'code',
       name: 'codeBlock',
