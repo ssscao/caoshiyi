@@ -23,19 +23,27 @@ function NavItem({
       <Link
         href={href}
         className={clsxm(
-          'relative block whitespace-nowrap px-3 py-2 transition',
+          'relative isolate block whitespace-nowrap rounded-full px-3 py-2 transition-colors duration-300',
           isActive
             ? 'text-lime-600 dark:text-lime-400'
             : 'hover:text-lime-600 dark:hover:text-lime-400'
         )}
       >
-        {children}
         {isActive && (
           <motion.span
-            className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-lime-700/0 via-lime-700/70 to-lime-700/0 dark:from-lime-400/0 dark:via-lime-400/40 dark:to-lime-400/0"
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-[-1] rounded-full bg-lime-500/10 dark:bg-lime-400/10"
             layoutId="active-nav-item"
+            transition={{
+              layout: {
+                duration: 0.4,
+                ease: [0.65, 0, 0.35, 1],
+              },
+            }}
           />
         )}
+
+        <span className="relative z-10">{children}</span>
       </Link>
     </li>
   )

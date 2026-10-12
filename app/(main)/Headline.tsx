@@ -10,7 +10,7 @@ import Balancer from 'react-wrap-balancer'
 import { SparkleIcon, UserSecurityIcon } from '~/assets'
 import { PeekabooLink } from '~/components/links/PeekabooLink'
 import { SocialLink } from '~/components/links/SocialLink'
-
+import { BorderBeam } from 'border-beam'
 
 
 // 🛠️ 标签组件一：【开发者】（对应“灵界和源堡的眷者”）
@@ -81,7 +81,14 @@ function Founder() {
 // 职责：把上面定义好的四个炫酷称号垂直排好，并为它们套上“首次打开网页时，从下往上飞入”的华丽物理弹簧动效。
 export function Headline() {
   return (
-    <div className="max-w-2xl">
+    <BorderBeam
+      size="md"
+      colorVariant="colorful"
+      theme="auto"
+      strength={0.7}
+      duration={3.1}
+    >
+      <div className="max-w-2xl rounded-2xl border border-zinc-200/60 bg-white/50 p-6 dark:border-zinc-800/70 dark:bg-zinc-950/30">
       {/* 🎬 动效一：主尊名大字报。motion.h1 代替了普通的 h1 标签，让它拥有了动画超能力 */}
       <motion.h1
         className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
@@ -171,7 +178,8 @@ export function Headline() {
           aria-label="我的邮箱"
           platform="mail"
         />
-      </motion.div>
-    </div>
+            </motion.div>
+      </div>
+    </BorderBeam>
   )
 }
