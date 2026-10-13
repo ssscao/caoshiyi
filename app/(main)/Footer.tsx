@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React from 'react'
 
 import { CursorClickIcon, UsersIcon } from '~/assets'
-import { PeekabooLink } from '~/components/links/PeekabooLink'
 import { Container } from '~/components/ui/Container'
 import { kvKeys } from '~/config/kv'
 import { navigationItems } from '~/config/nav'

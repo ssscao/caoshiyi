@@ -1,9 +1,6 @@
 'use client'
 
 // 加上这一行，把这个数字美化工具函数拉进来
-import { prettifyNumber } from '~/lib/math'
-
-
 // 引入第三方日期解析工具，用来将各种奇怪的后台时间格式规范化
 import { parseDateTime } from '@zolplay/utils'
 // 引入强大的动画库，专门负责给页面上的封面图、标题制作丝滑的入场动画效果
@@ -37,6 +34,7 @@ import { Prose } from '~/components/Prose'
 import { Button } from '~/components/ui/Button'
 // 引入居中容器组件，限制文章的最大宽度，防止屏幕太大时文字横向拉得太长导致阅读疲劳
 import { Container } from '~/components/ui/Container'
+import { prettifyNumber } from '~/lib/math'
 // 引入数学工具函数，负责把巨大的数字（如 12345）美化成可读性更高的格式（如 12.3k）
 import { type PostDetail } from '~/sanity/schemas/post'
 

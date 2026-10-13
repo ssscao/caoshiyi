@@ -18,8 +18,8 @@
 
 'use client' // 声明客户端组件：内部深度使用了 Framer Motion 的多状态并行触发器
 
-import React from 'react'
 import { motion } from 'framer-motion'
+import React from 'react'
 
 export function NetEaseMusic() {
   return (

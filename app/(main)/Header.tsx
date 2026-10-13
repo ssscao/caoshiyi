@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react';
 // 导入 Clerk 身份验证组件及 Hook
 import {
   SignedIn,
@@ -19,6 +18,7 @@ import {
   useMotionValue,
 } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import React from 'react';
 
 // 导入主导航、网易云音乐挂件和主题切换组件
 import { NavigationBar } from '~/app/(main)/NavigationBar';

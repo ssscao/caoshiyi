@@ -27,8 +27,6 @@ function Developer() {
   )
 }
 
-
-
 // 🛠️ 标签组件二：【设计师】（对应“源自古代的诡秘”）
 // 效果：鼠标放上去时，文字周围会出现一个像专业设计软件（如 Figma/Photoshop）里的那种带四个角落蓝框/绿框的高亮选框，且实线变虚线。
 function Designer() {
@@ -47,8 +45,6 @@ function Designer() {
   )
 }
 
-
-
 // 🛠️ 标签组件三：【完美主义/星星】（对应“贫困孩子的保护者”）
 // 效果：文字左边有一个小星星图标。当鼠标放上去时，星星会像魔法一样丝滑地旋转 180 度。
 function OCD() {
@@ -61,8 +57,6 @@ function OCD() {
   )
 }
 
-
-
 // 🛠️ 标签组件四：【安全/创始人】（对应“漫长历史的见证”）
 // 效果：左边有一个安全盾牌图标。鼠标放上去时，图标的内部镂空部分会变成淡淡的灰色，产生微弱的互动感。
 function Founder() {
@@ -74,8 +68,6 @@ function Founder() {
     </span>
   )
 }
-
-
 
 // 👑 主核心组件：【大标题 Headline】
 // 职责：把上面定义好的四个炫酷称号垂直排好，并为它们套上“首次打开网页时，从下往上飞入”的华丽物理弹簧动效。
@@ -111,7 +103,6 @@ export function Headline() {
         <Founder />
       </motion.h1>
 
-
       {/* 🎬 动效二：副标题介绍文案。比上面的大字稍微晚一点点出场，形成一种极具高级感的视觉先后层次 */}
       <motion.p
         className="mt-6 text-base text-zinc-600 dark:text-zinc-400"
@@ -130,7 +121,6 @@ export function Headline() {
           预留介绍
         </Balancer>
       </motion.p>
-
 
       {/* 🎬 动效三：社交媒体图标栏。最后排队登场，里面整整齐齐地排了一排按钮 */}
       <motion.div

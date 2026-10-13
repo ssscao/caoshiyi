@@ -20,7 +20,6 @@
 // 引入网页排版平衡器。它极其聪明，能自动计算字数，防止短句在换行时末尾悲惨地孤零零留出一个字（孤字断行）
 import Balancer from 'react-wrap-balancer'
 
-import { SocialLink } from '~/components/links/SocialLink'
 import { Container } from '~/components/ui/Container'
 
 // 引入同级目录下的文章列表组件（负责真正去读数据并铺设网格布局）
