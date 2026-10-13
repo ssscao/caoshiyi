@@ -1,4 +1,11 @@
+# allowBuilds:
+#   es5-ext: set this to true or false
+#   esbuild: set this to true or false
+#   fast-folder-size: set this to true or false
+
+packages: []
+
 allowBuilds:
   es5-ext: false
-  esbuild: false
+  esbuild: true
   fast-folder-size: false

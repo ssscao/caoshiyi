@@ -8,7 +8,7 @@ export default function AskMeAnythingPage() {
     <BorderBeam
           size="md"
           colorVariant="colorful"
-          theme="auto"
+          theme="light"
           strength={0.7}
           duration={3.1}
     >
