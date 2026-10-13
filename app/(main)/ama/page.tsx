@@ -5,12 +5,15 @@ export default function AskMeAnythingPage() {
   return (
 
 
-    <BorderBeam>
+    
 
     <Container className="mt-16 sm:mt-24">
+      <BorderBeam>
       毕业一年，大脑皮层已如气球般光滑，没有一丝感悟。
+
+      </BorderBeam>
     </Container>
-    </BorderBeam>
+    
 
 
 
