@@ -1,5 +1,5 @@
 import { Container } from '~/components/ui/Container'
-import { BorderBeam } from '~/components/ui/BorderBeam'
+import { BorderBeam } from 'border-beam'
 export default function AskMeAnythingPage() {
   return (
     <BorderBeam
