@@ -7,8 +7,8 @@ export default function AskMeAnythingPage() {
       <div className="relative overflow-hidden rounded-2xl border border-zinc-200 p-8 dark:border-zinc-800">
         毕业一年，大脑皮层已如气球般光滑，没有一丝感悟。
         
-        {/* 移除了报错的 size 属性，只保留支持的 duration 和 delay */}
-        <BorderBeam duration={12} delay={9} />
+        {/* 只使用标签本身，不传任何不支持的属性 */}
+        <BorderBeam />
       </div>
     </Container>
   )
