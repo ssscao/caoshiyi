@@ -56,7 +56,7 @@ function OCD() {
     <span className="group inline-flex items-center">
       {/* transform-gpu 代表启用显卡加速让动画不卡顿，duration-500 意思是旋转过程持续 0.5 秒，rotate-180 就是鼠标移入转半圈 */}
       <SparkleIcon className="mr-1 inline-flex transform-gpu transition-transform duration-500 group-hover:rotate-180" />
-      <span>欧洲大地上的幽灵</span>
+      <span>贝克兰德所有儿童的保护者</span>
     </span>
   )
 }
